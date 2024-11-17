@@ -1,6 +1,24 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link, useForm} from '@inertiajs/vue3';
+import DangerButton from "@/Components/DangerButton.vue";
+
+defineProps({
+    users: {
+        type: Object,
+    },
+})
+
+const form = useForm({});
+
+const deleteUser = (id: bigint) => {
+    if (confirm("Are you sure you want to move this to trash")) {
+        form.delete( route("user.delete", { id: id }), {
+            preserveScroll: true,
+        });
+    }
+};
+
 </script>
 
 <template>
@@ -24,10 +42,24 @@ import { Head } from '@inertiajs/vue3';
                         All users
                     </div>
 
-                    <div v-for="user in users" :key="user.id">
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <table>
+                            <tbody>
+                                <tr v-for="user in users" >
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.created_at }}</td>
+                                    <DangerButton
+                                        class="ml-2 py-3 rounded my-auto text-white bg-red-500"
+                                        @click="deleteUser(user.id)"
+                                    >
+                                        Delete
+                                    </DangerButton>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
         </div>
