@@ -53,6 +53,8 @@ const showingNavigationDropdown = ref(false);
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
                             <!-- Settings Dropdown -->
                             <div class="relative ms-3">
+
+
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -60,7 +62,7 @@ const showingNavigationDropdown = ref(false);
                                                 type="button"
                                                 class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                                             >
-                                                {{ $page.props.auth.user.name }}
+                                                {{ $page.props.auth.user ? $page.props.auth.user.name : 'Log In / Register'}}
 
                                                 <svg
                                                     class="-me-0.5 ms-2 h-4 w-4"
@@ -78,12 +80,15 @@ const showingNavigationDropdown = ref(false);
                                         </span>
                                     </template>
 
-                                    <template #content>
+
+                                    <template #content v-if="$page.props.auth.user">
+
                                         <DropdownLink
-                                            :href="route('profile.edit')"
+                                        :href="route('profile.edit')"
                                         >
                                             Profile
                                         </DropdownLink>
+
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
@@ -92,6 +97,24 @@ const showingNavigationDropdown = ref(false);
                                             Log Out
                                         </DropdownLink>
                                     </template>
+
+                                    <template #content v-else>
+
+                                        <DropdownLink
+                                            :href="route('login')"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        >
+                                            Log in
+                                        </DropdownLink>
+
+                                        <DropdownLink
+                                            :href="route('register')"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        >
+                                            Register
+                                        </DropdownLink>
+                                    </template>
+
                                 </Dropdown>
                             </div>
                         </div>
@@ -164,19 +187,24 @@ const showingNavigationDropdown = ref(false);
                             <div
                                 class="text-base font-medium text-gray-800 dark:text-gray-200"
                             >
-                                {{ $page.props.auth.user.name }}
+                                {{ $page.props.auth.user ? $page.props.auth.user.name : '' }}
                             </div>
                             <div class="text-sm font-medium text-gray-500">
-                                {{ $page.props.auth.user.email }}
+                                {{ $page.props.auth.user ? $page.props.auth.user.email : '' }}
                             </div>
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">
+                            <ResponsiveNavLink
+                                :href="route('profile.edit')"
+                                v-if="$page.props.auth.user"
+                            >
                                 Profile
                             </ResponsiveNavLink>
+
                             <ResponsiveNavLink
                                 :href="route('logout')"
+                                v-if="$page.props.auth.user"
                                 method="post"
                                 as="button"
                             >
