@@ -15,9 +15,24 @@ class UserSeeder extends Seeder
     {
         User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $admin = User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
         ]);
+        $admin->assignRole('Admin');
+
+        // -----
+        $customer = User::factory()->create([
+            'name' => 'Customer User',
+            'email' => 'customer@example.com',
+        ]);
+        $customer->assignRole('Customer');
+
+        // -----
+        $employee = User::factory()->create([
+            'name' => 'Employee User',
+            'email' => 'employee@example.com',
+        ]);
+        $employee->assignRole('Employee');
     }
 }
