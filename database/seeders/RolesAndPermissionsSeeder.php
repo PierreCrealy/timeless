@@ -17,17 +17,17 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         //create roles
-        $roleEmployee  = Role::create(['name' => 'Employee','guard_name'=> 'web']);
-        $roleCustomer  = Role::create(['name' => 'Customer','guard_name'=> 'web']);
-        $roleAdmin     = Role::create(['name' => 'Admin','guard_name'=> 'web']);
+        Role::create(['name' => 'Employee','guard_name'=> 'web']);
+        Role::create(['name' => 'Customer','guard_name'=> 'web']);
+        Role::create(['name' => 'Admin','guard_name'=> 'web']);
 
         /*
         //Permission
         //USER
         $permissionCreateUser = Permission::create(['name' => 'create-user','guard_name'=> 'api']);
-        $permissionReadUser = Permission::create(['name'=> 'read-user','guard_name'=> 'api']);
-        $permissionUpdateUser = Permission::create(['name'=> 'update-user','guard_name'=> 'api']);
-        $permissionDeleteUser = Permission::create(['name'=> 'delete-user','guard_name'=> 'api']);
+        $permissionReadUser   = Permission::create(['name' => 'read-user','guard_name'=> 'api']);
+        $permissionUpdateUser = Permission::create(['name' => 'update-user','guard_name'=> 'api']);
+        $permissionDeleteUser = Permission::create(['name' => 'delete-user','guard_name'=> 'api']);
 
         //assign permissions to each role
 

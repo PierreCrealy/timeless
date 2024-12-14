@@ -13,8 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-
         $admin = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
@@ -34,5 +32,8 @@ class UserSeeder extends Seeder
             'email' => 'employee@example.com',
         ]);
         $employee->assignRole('Employee');
+
+        // -----
+        User::factory(10)->create();
     }
 }
