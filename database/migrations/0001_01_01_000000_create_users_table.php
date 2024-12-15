@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('lastname');
+            $table->string('firstname');
             $table->string('email')->unique();
+            $table->integer('fidelity_pts');
             $table->timestamp('email_verified_at')->nullable();
 
             //$table->foreignId('status_id')->default(1)->constrained()->references('id')->on('status_users');

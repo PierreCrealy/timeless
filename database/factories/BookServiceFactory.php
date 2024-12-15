@@ -17,7 +17,8 @@ class BookServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => fake()->numberBetween(1,10),
+            'service_id' => fake()->numberBetween(1,10),
         ];
     }
 }

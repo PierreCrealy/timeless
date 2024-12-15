@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('number');
+            $table->string('capacity');
+            $table->string('price');
+            $table->boolean('status');
+
+            $table->foreignId('floor_id')->constrained()->references('id')->on('floors');
+
             $table->timestamps();
         });
     }

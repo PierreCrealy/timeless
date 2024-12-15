@@ -17,7 +17,14 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->title(),
+            'description' => fake()->text(50),
+            'start_datetime' => fake()->dateTime(),
+            'capacity' => fake()->numberBetween(5,25),
+            'price' => fake()->numberBetween(5,15),
+
+            'type_id' => fake()->numberBetween(1,5),
+            'theme_id' => fake()->numberBetween(1,3),
         ];
     }
 }

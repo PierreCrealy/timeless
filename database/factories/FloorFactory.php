@@ -17,7 +17,10 @@ class FloorFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'number' => fake()->numberBetween(1,3),
+            'name' => fake()->text(20),
+
+            'theme_id' => fake()->numberBetween(1,3),
         ];
     }
 }

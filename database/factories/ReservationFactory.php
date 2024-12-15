@@ -17,7 +17,10 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'start_datetime' => fake()->dateTime(),
+            'end_datetime' => fake()->dateTime(),
+
+            'user_id' => fake()->numberBetween(1,10),
         ];
     }
 }

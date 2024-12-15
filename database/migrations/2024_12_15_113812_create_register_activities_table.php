@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('register_activities', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->references('id')->on('users');
+            $table->foreignId('activity_id')->constrained()->references('id')->on('activities');
             $table->timestamps();
         });
     }

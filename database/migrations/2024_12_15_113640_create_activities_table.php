@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->dateTime('start_datetime');
+            $table->integer('capacity');
+            $table->float('price');
+
+            $table->foreignId('type_id')->constrained()->references('id')->on('type_activities');
+            $table->foreignId('theme_id')->constrained()->references('id')->on('themes');
+
             $table->timestamps();
         });
     }
