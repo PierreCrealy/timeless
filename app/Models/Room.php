@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -23,9 +24,9 @@ class Room extends Model
     ];
 
 
-    public function floor(): HasOne
+    public function floor(): BelongsTo
     {
-        return $this->hasOne(Floor::class);
+        return $this->belongsTo(Floor::class);
     }
 
     public function reservations(): BelongsToMany

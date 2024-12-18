@@ -17,6 +17,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
+        'name',
         'lastname',
         'firstname',
         'email',
@@ -29,6 +30,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     protected function casts(): array
     {
         return [
@@ -37,12 +43,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function reservations(): BelongsToMany
+    public function reservations(): HasMany
     {
-        return $this->belongsToMany(
-            Reservation::class,
-            ReservationRoom::class,
-        );
+        return $this->HasMany(Reservation::class);
 
     }
     public function services(): BelongsToMany

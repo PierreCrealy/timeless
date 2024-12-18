@@ -1,0 +1,637 @@
+$user = User::find(1);
+$activity = Activity::find(20);
+
+$test = $user->registrations;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(20);
+
+$test = $user->registrations;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(20);
+
+$test = $user->registrations;
+
+
+
+$user = User::find(1);
+
+
+$test = $user->registrations;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(20);
+
+$test = $user->registrations;
+
+
+
+$user = User::find(1);
+$activity = Room::find(20);
+
+$test = $user->registrations;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(20);
+
+$test = $activity->registrations;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(20);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(19);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(18);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Activity::find(11);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Room::find(11);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Room::find(8);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Room::find(8);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->users;
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->floor;
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->floor;
+
+
+
+$user = User::find(1);
+$activity = Floor::find(1);
+
+$test = $activity->rooms;
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt->reservation."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt->user."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt->user."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt->user."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt->user."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+
+foreach($test as $tt){
+ echo $tt->user."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+$test = $activity->reservations;
+
+
+$user->reservations
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$user->reservations;
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$user->reservations;
+  
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->user."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->reservations."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->rooms."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->rooms->id."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->rooms."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->rooms."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt->rooms."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test->rooms $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test->rooms as $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->reservations;
+  
+
+
+
+foreach($test as $tt){
+ echo $tt."<br>";
+}
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrations;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrations;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrationses;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrationses;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrationses;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrationses;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->test;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->test15;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->test15;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->test15;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->test15;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->test15;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrations;
+  
+
+
+
+$user = User::find(1);
+$activity = Room::find(1);
+
+
+
+
+$test = $user->registrations;
+  
+
+
+
