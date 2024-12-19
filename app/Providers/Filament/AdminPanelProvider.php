@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\ReservationChart;
 use App\Filament\Widgets\StatsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -41,6 +42,7 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
                 StatsWidget::class,
+                ReservationChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,
