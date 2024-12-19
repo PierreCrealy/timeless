@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -19,9 +20,9 @@ class Floor extends Model
         'theme_id',
     ];
 
-    public function theme(): HasOne
+    public function theme(): BelongsTo
     {
-        return $this->hasOne(Theme::class);
+        return $this->belongsTo(Theme::class);
     }
 
     public function rooms(): HasMany
