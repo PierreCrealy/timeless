@@ -20,7 +20,7 @@ class MenuFactory extends Factory
             'theme' => fake()->numberBetween(0, 2),
             'description' => fake()->text(),
             'price' => fake()->randomNumber(2),
-            'status' => fake()->text(),
+            'status' => fake()->boolean(),
         ];
     }
 }
