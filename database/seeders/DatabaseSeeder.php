@@ -32,6 +32,15 @@ class DatabaseSeeder extends Seeder
             ReservationRoomSeeder::class,
             BookServiceSeeder::class,
 
+            IngredientSeeder::class,
+            MenuSeeder::class,
+            DishSeeder::class,
+            DishCompositionSeeder::class,
+            TableSeeder::class,
+            BillSeeder::class,
+            OrderSeeder::class,
+            OrderCompositionSeeder::class,
+
 
         ]);
 

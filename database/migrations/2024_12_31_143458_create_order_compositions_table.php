@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bills', function (Blueprint $table) {
+        Schema::create('order_compositions', function (Blueprint $table) {
             $table->id();
 
-            $table->string('reference')->unique();
-            $table->float('price');
-            $table->dateTime('pay_date')->nullable();
-            $table->text('pay_method');
-
+            $table->foreignId('order_id')->constrained()->references('id')->on('orders');
+            $table->foreignId('menu_id')->constrained()->references('id')->on('menus');
 
             $table->timestamps();
         });
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('order_compositions');
     }
 };

@@ -17,7 +17,10 @@ class MenuFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'theme' => fake()->numberBetween(0, 2),
+            'description' => fake()->text(),
+            'price' => fake()->randomNumber(2),
+            'status' => fake()->text(),
         ];
     }
 }

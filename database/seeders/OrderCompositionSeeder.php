@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ingredient;
+use App\Models\OrderComposition;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class IngredientSeeder extends Seeder
+class OrderCompositionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Ingredient::factory(40)->create();
+        OrderComposition::factory(15)->create();
     }
 }

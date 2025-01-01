@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dish>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OrderComposition>
  */
-class DishFactory extends Factory
+class OrderCompositionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +17,10 @@ class DishFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'description' => fake()->text(),
-            'price' => fake()->randomNumber(2),
-            'status' => fake()->boolean(),
-
+            'order_id' => fake()->numberBetween(1, 10),
             'menu_id' => fake()->numberBetween(1, 3),
         ];
     }
+
+    
 }

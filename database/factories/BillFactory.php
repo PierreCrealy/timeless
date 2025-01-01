@@ -17,7 +17,10 @@ class BillFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'reference' => 'FAC'.fake()->numberBetween(0, 10000),
+            'price' => fake()->randomNumber(2),
+            'pay_date' => fake()->dateTime(),
+            'pay_method' => fake()->numberBetween(0, 2),
         ];
     }
 }

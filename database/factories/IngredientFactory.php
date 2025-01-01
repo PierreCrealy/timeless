@@ -17,7 +17,12 @@ class IngredientFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'description' => fake()->text(),
+            'price' => fake()->randomNumber(2),
+            'delivery_date' => fake()->dateTime(),
+            'stock' => fake()->numberBetween(0, 50),
+            'origin' => fake()->name(),
         ];
     }
 }

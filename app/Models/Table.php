@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Bill extends Model
+class Table extends Model
 {
-    /** @use HasFactory<\Database\Factories\BillFactory> */
+    /** @use HasFactory<\Database\Factories\TableFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'reference',
-        'price',
-        'pay_date',
-        'pay_method',
+        'name',
+        'capacity',
+        'status',
     ];
 
-    public function order(): HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
+
 }
