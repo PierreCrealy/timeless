@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Resources\DishResource\Pages;
+use App\Filament\Resources\DishResource\RelationManagers;
+use App\Models\Dish;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,12 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class DishResource extends Resource
 {
-    protected static ?string $model = User::class;
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Common';
-
+    protected static ?string $model = Dish::class;
+    protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
+    protected static ?string $navigationGroup = 'Restaurant';
 
     public static function form(Form $form): Form
     {
@@ -26,12 +25,16 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
+                Forms\Components\TextInput::make('description')
                     ->required(),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
+                Forms\Components\TextInput::make('price')
+                    ->required()
+                    ->numeric()
+                    ->suffix('€'),
+                Forms\Components\TextInput::make('status')
+                    ->required(),
+                Forms\Components\Select::make('menu_id')
+                    ->relationship('menu', 'id')
                     ->required(),
             ]);
     }
@@ -42,10 +45,24 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
+                Tables\Columns\TextColumn::make('price')
+                    ->money('eur')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->formatStateUsing(fn ($state) => $state ? 'Disponible' : 'Indisponible')
+                    ->badge()
+                    ->searchable()
+                    ->colors([
+                        'danger' => fn ($state): bool => $state == 0,
+                        'success' => fn ($state): bool => $state == 1,
+                    ]),
+                Tables\Columns\TextColumn::make('menu.id')
+                    ->badge()
+                    ->color('info')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -79,9 +96,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListDishes::route('/'),
+            'create' => Pages\CreateDish::route('/create'),
+            'edit' => Pages\EditDish::route('/{record}/edit'),
         ];
     }
 }

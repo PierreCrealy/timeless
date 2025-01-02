@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ActivityResource\Pages;
-use App\Filament\Resources\ActivityResource\RelationManagers;
-use App\Models\Activity;
+use App\Filament\Resources\IngredientResource\Pages;
+use App\Filament\Resources\IngredientResource\RelationManagers;
+use App\Models\Ingredient;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,36 +13,30 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ActivityResource extends Resource
+class IngredientResource extends Resource
 {
-    protected static ?string $model = Activity::class;
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
-    protected static ?string $navigationGroup = 'Common';
+    protected static ?string $model = Ingredient::class;
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+    protected static ?string $navigationGroup = 'Restaurant';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
+                Forms\Components\TextInput::make('name')
                     ->required(),
-                Forms\Components\TextInput::make('description')
-                    ->wrap()
-                    ->required(),
-                Forms\Components\DateTimePicker::make('start_datetime')
-                    ->required(),
-                Forms\Components\TextInput::make('capacity')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\TextInput::make('description'),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
-                Forms\Components\TextInput::make('type_id')
+                    ->suffix('€'),
+                Forms\Components\DateTimePicker::make('delivery_date')
+                    ->required(),
+                Forms\Components\TextInput::make('stock')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('theme_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\TextInput::make('origin')
+                    ->required(),
             ]);
     }
 
@@ -50,25 +44,28 @@ class ActivityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('start_datetime')
+                Tables\Columns\TextColumn::make('price')
+                    ->money('eur')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('delivery_date')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('capacity')
+                Tables\Columns\TextColumn::make('stock')
+                    ->badge()
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('type_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('theme_id')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->colors([
+                        'danger' => static fn ($state): bool => $state <= 3, // Rouge si le stock est < 3
+                        'warning' => static fn ($state): bool => $state > 3 && $state < 10, // Orange si stock < 10
+                        'info' => static fn ($state): bool => $state >= 10, // Bleu si stock >= 10
+                    ]),
+                Tables\Columns\TextColumn::make('origin')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -101,9 +98,9 @@ class ActivityResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListActivities::route('/'),
-            'create' => Pages\CreateActivity::route('/create'),
-            'edit' => Pages\EditActivity::route('/{record}/edit'),
+            'index' => Pages\ListIngredients::route('/'),
+            'create' => Pages\CreateIngredient::route('/create'),
+            'edit' => Pages\EditIngredient::route('/{record}/edit'),
         ];
     }
 }

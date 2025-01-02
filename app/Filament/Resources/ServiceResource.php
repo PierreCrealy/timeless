@@ -26,6 +26,7 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required(),
                 Forms\Components\TextInput::make('description')
+                    ->wrap()
                     ->required(),
                 Forms\Components\TextInput::make('price')
                     ->required()

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Resources\MenuResource\Pages;
+use App\Filament\Resources\MenuResource\RelationManagers;
+use App\Models\Menu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,25 +13,26 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class MenuResource extends Resource
 {
-    protected static ?string $model = User::class;
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Common';
+    protected static ?string $model = Menu::class;
 
+    protected static ?string $navigationIcon = 'heroicon-o-document-currency-euro';
+    protected static ?string $navigationGroup = 'Restaurant';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('theme')
                     ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
+                Forms\Components\TextInput::make('description')
                     ->required(),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
+                Forms\Components\TextInput::make('price')
+                    ->required()
+                    ->numeric()
+                    ->suffix('€'),
+                Forms\Components\Toggle::make('status')
                     ->required(),
             ]);
     }
@@ -40,13 +41,24 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('theme')
+                    ->badge()
+                    ->color('info')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
+                Tables\Columns\TextColumn::make('price')
+                    ->money('eur')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->formatStateUsing(fn ($state) => $state ? 'Disponible' : 'Indisponible')
+                    ->badge()
+                    ->searchable()
+                    ->colors([
+                        'danger' => fn ($state): bool => $state == 0,
+                        'success' => fn ($state): bool => $state == 1,
+                    ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -79,9 +91,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListMenus::route('/'),
+            'create' => Pages\CreateMenu::route('/create'),
+            'edit' => Pages\EditMenu::route('/{record}/edit'),
         ];
     }
 }

@@ -1,1 +1,7 @@
-$test = Table::find(1);
+$test = Dish:find(1);
+$test = Dish:find(1);
+$test = Dish::find(1);
+$test = Dish::find(1);
+$test->menu;
+$test = Dish::find(1);
+$test->menu->theme;

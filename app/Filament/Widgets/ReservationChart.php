@@ -13,26 +13,26 @@ class ReservationChart extends ChartWidget
 
     protected function getData(): array
     {
-        $reservationsParMois = Reservation::selectRaw('MONTH(start_datetime) as month, COUNT(*) as total')
-            ->whereYear('start_datetime', now()->year)
-            ->groupBy('month')
-            ->orderBy('month')
-            ->pluck('total', 'month');  // Get associative array with month as key
+        // $reservationsParMois = Reservation::selectRaw('MONTH(start_datetime) as month, COUNT(*) as total')
+        //     ->whereYear('start_datetime', now()->year)
+        //     ->groupBy('month')
+        //     ->orderBy('month')
+        //     ->pluck('total', 'month');  // Get associative array with month as key
 
-        // Init array with number of reservation per month
-        $moisAvecReservations = collect(range(1, 12))->mapWithKeys(function ($month) use ($reservationsParMois) {
-            return [$month => $reservationsParMois->get($month, 0)];
-        });
+        // // Init array with number of reservation per month
+        // $moisAvecReservations = collect(range(1, 12))->mapWithKeys(function ($month) use ($reservationsParMois) {
+        //     return [$month => $reservationsParMois->get($month, 0)];
+        // });
 
-        // Get only values per month
-        $numberReservationPerMonth = $moisAvecReservations->values()->toArray();
+        // // Get only values per month
+        // $numberReservationPerMonth = $moisAvecReservations->values()->toArray();
 
 
         return [
             'datasets' => [
                 [
                     'label' => 'Reservations rooms',
-                    'data'  => $numberReservationPerMonth,
+                    'data'  => [0,1,20,15,45],
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
                 ],

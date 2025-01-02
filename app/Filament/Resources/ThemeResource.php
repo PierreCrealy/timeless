@@ -17,7 +17,7 @@ class ThemeResource extends Resource
 {
     protected static ?string $model = Theme::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
-    protected static ?string $navigationGroup = 'Commun';
+    protected static ?string $navigationGroup = 'Common';
 
     public static function form(Form $form): Form
     {
@@ -37,6 +37,7 @@ class ThemeResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
