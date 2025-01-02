@@ -59,10 +59,13 @@ class DishResource extends Resource
                         'danger' => fn ($state): bool => $state == 0,
                         'success' => fn ($state): bool => $state == 1,
                     ]),
-                Tables\Columns\TextColumn::make('menu.id')
+                Tables\Columns\TextColumn::make('menu.name')
                     ->badge()
                     ->color('info')
-                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('menu.theme.title')
+                    ->badge()
+                    ->color('info')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -1,7 +1,14 @@
-$test = Dish:find(1);
-$test = Dish:find(1);
 $test = Dish::find(1);
 $test = Dish::find(1);
+$test = Dish::find(1);
+
+$test->theme;
+$test = Dish::find(1);
+
 $test->menu;
 $test = Dish::find(1);
+
 $test->menu->theme;
+$test = Dish::find(1);
+
+$test->menu->theme->title;
