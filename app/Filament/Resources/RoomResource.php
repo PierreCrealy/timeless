@@ -5,13 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RoomResource\Pages;
 use App\Filament\Resources\RoomResource\RelationManagers;
 use App\Models\Room;
+use BladeUI\Icons\Components\Icon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RoomResource extends Resource
 {
@@ -48,8 +47,10 @@ class RoomResource extends Resource
                 Tables\Columns\TextColumn::make('number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('capacity')
+                    ->formatStateUsing(fn ($state) => $state . ' personnes')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
+                    ->suffix('€')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
                     ->boolean(),
