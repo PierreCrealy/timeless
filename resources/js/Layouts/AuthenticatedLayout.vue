@@ -37,14 +37,32 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
-                                    Dashboard
+                                    Accueil
                                 </NavLink>
 
                                 <NavLink
-                                    :href="route('user.index')"
-                                    :active="route().current('user')"
+                                    :href="route('about')"
+                                    :active="route().current('about')"
                                 >
-                                    Users
+                                    A propos
+                                </NavLink>
+                                <NavLink
+                                    :href="route('dashboard')"
+                                    class="w-16"
+                                >
+                                    <ApplicationLogo/>
+                                </NavLink>
+                                <NavLink
+                                    :href="route('service')"
+                                    :active="route().current('service')"
+                                >
+                                    Services
+                                </NavLink>
+                                <NavLink
+                                    :href="route('contactUs')"
+                                    :active="route().current('contactUs')"
+                                >
+                                    Contactez-nous
                                 </NavLink>
 
                             </div>
@@ -214,20 +232,8 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
             </nav>
-
-            <!-- Page Heading -->
-            <header
-                class="bg-white shadow dark:bg-gray-800"
-                v-if="$slots.header"
-            >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
-
             <!-- Page Content -->
             <main>
-                <slot />
             </main>
         </div>
     </div>
