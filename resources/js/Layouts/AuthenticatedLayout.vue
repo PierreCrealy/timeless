@@ -6,16 +6,15 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
-
 const showingNavigationDropdown = ref(false);
+
+import imageTime from '../../image/headerTimeless.png';
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
+        <div class="min-h-screen bg-cover bg-center" :style="{ backgroundImage: `url(${imageTime})` }">
+            <nav>
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
@@ -31,20 +30,38 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" 
                             >
                                 <NavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
-                                    Dashboard
+                                    Accueil
                                 </NavLink>
 
                                 <NavLink
-                                    :href="route('user.index')"
-                                    :active="route().current('user')"
+                                    :href="route('about')"
+                                    :active="route().current('about')"
                                 >
-                                    Users
+                                    A propos
+                                </NavLink>
+                                <NavLink
+                                    :href="route('dashboard')"
+                                    class="w-16"
+                                >
+                                    <ApplicationLogo/>
+                                </NavLink>
+                                <NavLink
+                                    :href="route('service')"
+                                    :active="route().current('service')"
+                                >
+                                    Services
+                                </NavLink>
+                                <NavLink
+                                    :href="route('contactUs')"
+                                    :active="route().current('contactUs')"
+                                >
+                                    Contactez-nous
                                 </NavLink>
 
                             </div>
@@ -53,7 +70,6 @@ const showingNavigationDropdown = ref(false);
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
                             <!-- Settings Dropdown -->
                             <div class="relative ms-3">
-
 
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
@@ -79,7 +95,6 @@ const showingNavigationDropdown = ref(false);
                                             </button>
                                         </span>
                                     </template>
-
 
                                     <template #content v-if="$page.props.auth.user">
 
@@ -215,20 +230,14 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </nav>
 
-            <!-- Page Heading -->
-            <header
-                class="bg-white shadow dark:bg-gray-800"
-                v-if="$slots.header"
-            >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
+            <!-- Main Content -->
+            <div class="relative flex items-center justify-center h-screen overflow-hidden bg-cover bg-center" style="background-image: url('path_to_your_image.jpg')">
+                <div class="absolute inset-0 bg-black opacity-50"></div>
+                <div class="relative z-10 text-center text-white">
+                    <h1 class="text-5xl font-bold" style="color: var(--primary-color)">TIMELESS</h1>
+                    <p class="mt-3 text-xl">Bienvenue à Timeless, l’hôtel-restaurant où passé, présent et futur se rencontrent.</p>
                 </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
+            </div>
         </div>
     </div>
 </template>

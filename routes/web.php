@@ -28,4 +28,16 @@ Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.
 Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::delete('/users', [\App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
 
+Route::get('/about', function () {
+    return Inertia::render('Static/About');
+})->name('about');
+
+Route::get('/service', function () {
+    return Inertia::render('Static/Services');
+})->name('service');
+
+Route::get('/contactUs', function () {
+    return Inertia::render('Static/ContactUs');
+})->name('contactUs');
+
 require __DIR__.'/auth.php';
