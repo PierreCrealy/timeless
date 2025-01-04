@@ -62,11 +62,13 @@ class ActivityResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('type_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('type.title')
+                    ->badge()
+                    ->color('primary')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('theme_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('theme.title')
+                    ->badge()
+                    ->color('info')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

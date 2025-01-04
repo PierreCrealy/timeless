@@ -29,8 +29,10 @@ class RoomResource extends Resource
                 Forms\Components\TextInput::make('capacity')
                     ->required(),
                 Forms\Components\TextInput::make('price')
+                    ->suffix('€')
                     ->required(),
                 Forms\Components\Toggle::make('status')
+                    ->label('Disponible ?')
                     ->required(),
                 Forms\Components\Select::make('floor_id')
                     ->relationship('floor', 'name')
@@ -53,6 +55,7 @@ class RoomResource extends Resource
                     ->suffix('€')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
+                    ->label('Disponible ?')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('floor.name')
                     ->numeric()

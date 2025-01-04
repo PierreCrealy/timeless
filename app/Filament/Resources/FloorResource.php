@@ -72,7 +72,7 @@ class FloorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RoomsRelationManager::class,
         ];
     }
 

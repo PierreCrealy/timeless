@@ -60,7 +60,7 @@ class User extends Authenticatable
     public function registrations(): BelongsToMany
     {
         return $this->belongsToMany(
-            Register::class,
+            Activity::class,
             RegisterActivity::class,
         );
 

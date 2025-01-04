@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -24,14 +25,14 @@ class Activity extends Model
         'theme_id',
     ];
 
-    public function type(): HasOne
+    public function type(): BelongsTo
     {
-        return $this->hasOne(TypeActivity::class);
+        return $this->belongsTo(TypeActivity::class);
     }
 
-    public function theme(): HasOne
+    public function theme(): BelongsTo
     {
-        return $this->hasOne(Theme::class);
+        return $this->belongsTo(Theme::class);
     }
 
     public function registrations(): HasMany
