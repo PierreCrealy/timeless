@@ -3,15 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ActivityResource\Pages;
-use App\Filament\Resources\ActivityResource\RelationManagers;
+use App\Filament\Resources\ActivityResource\RelationManagers\RegistrationsRelationManager;
+use App\Filament\Resources\RegisterActivityResource\RelationManagers\UserRelationManager;
 use App\Models\Activity;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ActivityResource extends Resource
 {
@@ -26,7 +25,6 @@ class ActivityResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required(),
                 Forms\Components\TextInput::make('description')
-                    ->wrap()
                     ->required(),
                 Forms\Components\DateTimePicker::make('start_datetime')
                     ->required(),
@@ -53,6 +51,7 @@ class ActivityResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start_datetime')
                     ->dateTime()
@@ -94,7 +93,7 @@ class ActivityResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RegistrationsRelationManager::class,
         ];
     }
 
