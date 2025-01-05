@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Filament\Resources\ActivityResource\RelationManagers\RegistrationsRelationManager;
+use App\Filament\Resources\ActivityResource\RelationManagers\UsersRelationManager;
 use App\Filament\Resources\RegisterActivityResource\RelationManagers\UserRelationManager;
 use App\Models\Activity;
 use Filament\Forms;
@@ -95,7 +96,7 @@ class ActivityResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RegistrationsRelationManager::class,
+            UsersRelationManager::class,
         ];
     }
 

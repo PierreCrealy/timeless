@@ -43,16 +43,32 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('lastname')
+                    ->formatStateUsing(function ($state, User $user) {
+                        return $user->getRoleNames()->first();
+                    })
+                    ->badge()
+                    ->colors([
+                        'danger' => static fn ($state, User $user): bool => $user->getRoleNames()->first() == "Customer",
+                        'warning' => static fn ($state, User $user): bool => $user->getRoleNames()->first() == "Employee",
+                        'info' => static fn ($state, User $user): bool => $user->getRoleNames()->first() == "Admin",
+                    ])
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('fidelity_pts')
+                    ->numeric()
+                    ->sortable()
+                    ->badge()
+                    ->colors([
+                        'danger' => static fn ($state): bool => $state <= 25,
+                        'warning' => static fn ($state): bool => $state > 25 && $state < 75,
+                        'info' => static fn ($state): bool => $state >= 75,
+                    ]),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
