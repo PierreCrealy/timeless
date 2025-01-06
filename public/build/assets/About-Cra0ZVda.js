@@ -1,0 +1,1 @@
+import{d as t,g as a,a as o,u as n,e as r,F as s,o as u,Z as l}from"./app-CpZc5tM5.js";const _=t({__name:"About",setup(m){return(p,e)=>(u(),a(s,null,[o(n(l),{title:"About"}),e[0]||(e[0]=r(" abbout ! "))],64))}});export{_ as default};

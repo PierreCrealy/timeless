@@ -17,7 +17,11 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'status' => fake()->numberBetween(0, 2),
+
+            'table_id' => fake()->numberBetween(1, 25),
+            'room_id' => fake()->numberBetween(1, 60),
+            'bill_id' => fake()->numberBetween(1, 10),
         ];
     }
 }

@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+
+            $table->string('reference')->unique();
+            $table->float('price');
+            $table->dateTime('pay_date')->nullable();
+            $table->text('pay_method');
+
+
             $table->timestamps();
         });
     }

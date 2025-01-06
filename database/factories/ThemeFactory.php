@@ -17,7 +17,8 @@ class ThemeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->title(),
+            'description' => fake()->text(50),
         ];
     }
 }

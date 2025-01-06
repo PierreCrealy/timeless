@@ -1,1 +1,0 @@
-import{d as t,g as r,a,u as s,e as n,F as o,o as c,Z as i}from"./app-Z5DXLoli.js";const u=t({__name:"Services",setup(l){return(m,e)=>(c(),r(o,null,[a(s(i),{title:"Services"}),e[0]||(e[0]=n(" service ! "))],64))}});export{u as default};
