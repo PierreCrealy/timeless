@@ -2,8 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "FrenchWinejnl";
+    src: url("../font/frenchwinejnl.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 
 :root {
     --background-color: #141414;
     --primary-color: #D4A956;
+}
+
+.primaryTitle {
+    font-family: "FrenchWinejnl", sans-serif;
+}
+
+.custom-button {
+    position: relative;
+    padding: 10px 20px;
+    color: white;
+    border: 1px solid var(--primary-color);
+    background: none;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.custom-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    transform: skewX(-45deg);
+    transition: left 0.3s;
+    z-index: 1; /* Assurez-vous que le pseudo-élément est en dessous du texte */
+}
+
+.custom-button span {
+    position: relative;
+    z-index: 2; /* Assurez-vous que le texte est au-dessus du pseudo-élément */
+}
+
+.custom-button:hover::before {
+    left: 150%;
+}
+
+.custom-button:hover {
+    background: var(--primary-color);
 }
