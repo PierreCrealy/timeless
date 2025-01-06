@@ -1,14 +1,15 @@
-$test = Dish::find(1);
-$test = Dish::find(1);
-$test = Dish::find(1);
+$test = User::find(1);
 
-$test->theme;
-$test = Dish::find(1);
+$test->getRolesName();
+$test = User::find(1);
 
-$test->menu;
-$test = Dish::find(1);
+$test->getRoleNames();
+$test = User::find(1);
 
-$test->menu->theme;
-$test = Dish::find(1);
+$test->getRoleNames()->first();
+$test = User::find(2);
 
-$test->menu->theme->title;
+
+$test = User::find(3);
+
+
