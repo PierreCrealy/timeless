@@ -3,6 +3,8 @@ import logo from '@images/logo.png';
 import instagramLogo from '@images/footer/instagram-logo.png';
 import facebookLogo from '@images/footer/facebook-logo.png';
 import twitterLogo from '@images/footer/twitter-logo.png';
+
+import NavLink from '@/Components/NavLink.vue';
 </script>
 <template>
     <!-- Footer Section -->
@@ -19,7 +21,11 @@ import twitterLogo from '@images/footer/twitter-logo.png';
                 <div class="w-full md:w-1/3 px-2 mb-4">
                     <h3 class="text-xl font-bold text-white mb-4">En savoir plus</h3>
                     <ul>
-                        <li><a href="#" class="text-white hover:text-yellow-600">A Propos</a></li>
+                        <li>
+                            <NavLink :href="route('dashboard')" :active="route().current('about')">
+                                <span class="text-white hover:primaryColor">A Propos</span>
+                            </NavLink>
+                        </li>
                         <li><a href="#" class="text-white hover:text-yellow-600">Moyen Age</a></li>
                         <li><a href="#" class="text-white hover:text-yellow-600">Année 80</a></li>
                         <li><a href="#" class="text-white hover:text-yellow-600">Future</a></li>

@@ -28,6 +28,10 @@
     color: var(--primary-color);
 }
 
+.greyColor {
+    color: var(--grey-color);
+}
+
 .descriptionTextColor {
     color: var(--grey-color);
 }
@@ -87,11 +91,11 @@
 
 .card-back {
     position: relative;
-    z-index: 1; /* Les cartes latérales sont en arrière-plan */
-    transform: translateY(20px); /* Ajustez cette valeur selon vos besoins */
+    z-index: 1;
+    transform: translateY(20px);
 }
 
 .card-front {
     position: relative;
-    z-index: 2; /* La carte centrale est en avant-plan */
+    z-index: 2;
 }
