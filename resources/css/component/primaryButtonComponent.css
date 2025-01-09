@@ -1,0 +1,52 @@
+/*
+ * --------------------------------------------------------------------------
+ * Primary Button Styles
+ * --------------------------------------------------------------------------
+ *
+ * Ce fichier contient les styles CSS pour le composant du bouton principale
+ *
+ *
+ * Fichiers associés :
+ *   - primaryButton.vue
+ *
+ * Auteur : Pierre, Loane et Valentin
+ * Année   : 2025
+ *
+ * --------------------------------------------------------------------------
+ */
+
+ .custom-button {
+    position: relative;
+    padding: 10px 20px;
+    color: white;
+    border: 1px solid var(--primary-color);
+    background: none;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.custom-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    transform: skewX(-45deg);
+    transition: left 0.3s;
+    z-index: 1;
+}
+
+.custom-button span {
+    position: relative;
+    z-index: 2; 
+}
+
+.custom-button:hover::before {
+    left: 150%;
+}
+
+.custom-button:hover {
+    background: var(--primary-color);
+}

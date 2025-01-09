@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
@@ -200,8 +199,12 @@ import logo from '../../image/logo.png';
             <!-- Main Content -->
             <div class="relative flex items-center justify-center h-[90vh] overflow-hidden bg-cover bg-center">
                 <div class="relative z-10 text-center text-white">
-                    <h1 class="text-8xl font-bold primaryTitle" style="color: var(--primary-color)">TIMELESS</h1>
-                    <p class="mt-3 text-xl italic">Bienvenue à Timeless, l’hôtel-restaurant où passé, présent et futur se rencontrent.</p>
+                    <h1 class="font-size-128px fontPrimaryTitle primaryColor">
+                        <slot name="title"></slot>
+                    </h1>
+                    <p class="mt-3 font-size-33px fontSegoeUIItalic">
+                        <slot name="subtitle"></slot>
+                    </p>
                 </div>
             </div>
         </div>

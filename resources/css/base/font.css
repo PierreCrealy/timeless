@@ -1,0 +1,71 @@
+/*
+ * --------------------------------------------------------------------------
+ * Base Styles
+ * --------------------------------------------------------------------------
+ *
+ * Le fichier "font" en CSS est utilisé pour définir des fonts de base qui seront appliqués aux textes correspondant
+ *
+ *
+ * Fichiers associés :
+ *   - Tous les fichiers
+ *
+ * Auteur : Pierre, Loane et Valentin
+ * Année   : 2025
+ *
+ * --------------------------------------------------------------------------
+ */
+
+ @font-face {
+    font-family: "FrenchWinejnl";
+    src: url("@fonts/frenchwinejnl.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SegoeUI";
+    src: url("@fonts/SegoeUI.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SegoeUIBold";
+    src: url("@fonts/SegoeUI.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SegoeUIItalic";
+    src: url("@fonts/SegoeUIItalic.ttf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "SegoeUIBoldItalic";
+    src: url("@fonts/SegoeUIBoldItalic.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+.fontPrimaryTitle {
+    font-family: "FrenchWinejnl", sans-serif;
+}
+
+.fontSegoeUI {
+    font-family: "SegoeUI", sans-serif;
+}
+
+.fontSegoeUIBold {
+    font-family: "SegoeUIBold", sans-serif;
+}
+
+.fontSegoeUIItalic {
+    font-family: "SegoeUIItalic", sans-serif;
+}
+
+.fontSegoeUIBoldItalic {
+    font-family: "SegoeUIBoldItalic", sans-serif;
+}

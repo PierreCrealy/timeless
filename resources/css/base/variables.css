@@ -1,0 +1,97 @@
+/*
+ * --------------------------------------------------------------------------
+ * Variables Styles
+ * --------------------------------------------------------------------------
+ *
+ * Le fichier variables contiendra l'ensemble des variables 
+ *
+ *
+ * Fichiers associés :
+ *   - Tous les fichiers
+ *
+ * Auteur : Pierre, Loane et Valentin
+ * Année   : 2025
+ *
+ * --------------------------------------------------------------------------
+ */
+
+ :root {
+    --background-color: #141414;
+    --primary-color: #D4A956;
+    --grey-color: #A2A2A2;
+}
+
+/* -- COLORS
+/* ----------------------------------------------*/
+
+ .primaryColor {
+    color: var(--primary-color);
+}
+
+.descriptionTextColor {
+    color: var(--grey-color);
+}
+
+.backgroundPrimaryColor {
+    background-color: var(--primary-color);
+}
+
+.borderPrimaryColor {
+    border: 4px solid var(--primary-color);
+}
+
+.backgroundColor {
+    background-color: var(--background-color);
+}
+
+
+/* -- font-size
+/* ----------------------------------------------*/
+.font-size-128px {
+    font-size: 128px;
+}
+
+.font-size-96px {
+    font-size: 96px;
+}
+
+.font-size-74px {
+    font-size: 74px;
+}
+
+.font-size-40px {
+    font-size: 40px;
+}
+
+.font-size-33px {
+    font-size: 33px;
+}
+
+.font-size-24px {
+    font-size: 24px;
+}
+
+.font-size-15px {
+    font-size: 15px;
+}
+
+.fixed-height {
+    height:230px;
+    width:100%;
+    object-fit: cover;
+}
+
+.relative {
+    position: relative;
+}
+
+.card-back {
+    position: relative;
+    z-index: 1; /* Les cartes latérales sont en arrière-plan */
+    transform: translateY(20px); /* Ajustez cette valeur selon vos besoins */
+}
+
+.card-front {
+    position: relative;
+    z-index: 2; /* La carte centrale est en avant-plan */
+}
