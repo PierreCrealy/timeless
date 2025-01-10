@@ -52,7 +52,7 @@ class RoomResource extends Resource
                 Tables\Columns\TextColumn::make('number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('capacity')
-                    ->formatStateUsing(fn ($state) => $state . ' personnes')
+                    ->suffix(' personnes')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->numeric()

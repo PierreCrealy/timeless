@@ -41,15 +41,15 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('theme')
+                Tables\Columns\TextColumn::make('theme.title')
                     ->badge()
                     ->color('info')
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money('eur')
+                    ->suffix('€')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->formatStateUsing(fn ($state) => $state ? 'Disponible' : 'Indisponible')
