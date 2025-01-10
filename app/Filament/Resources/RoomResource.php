@@ -25,10 +25,13 @@ class RoomResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('number')
+                    ->integer()
                     ->required(),
                 Forms\Components\TextInput::make('capacity')
+                    ->integer()
                     ->required(),
                 Forms\Components\TextInput::make('price')
+                    ->numeric()
                     ->suffix('€')
                     ->required(),
                 Forms\Components\Toggle::make('status')
@@ -52,6 +55,7 @@ class RoomResource extends Resource
                     ->formatStateUsing(fn ($state) => $state . ' personnes')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
+                    ->numeric()
                     ->suffix('€')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
@@ -60,14 +64,6 @@ class RoomResource extends Resource
                 Tables\Columns\TextColumn::make('floor.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -85,7 +81,7 @@ class RoomResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ReservationsRelationManager::class,
         ];
     }
 

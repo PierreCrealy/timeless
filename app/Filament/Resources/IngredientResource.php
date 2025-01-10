@@ -31,6 +31,7 @@ class IngredientResource extends Resource
                     ->numeric()
                     ->suffix('€'),
                 Forms\Components\DateTimePicker::make('delivery_date')
+                    ->format('d/m/Y H:i')
                     ->required(),
                 Forms\Components\TextInput::make('stock')
                     ->required()
@@ -53,7 +54,7 @@ class IngredientResource extends Resource
                     ->money('eur')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('delivery_date')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('stock')
                     ->badge()

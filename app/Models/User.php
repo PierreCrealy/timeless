@@ -20,7 +20,6 @@ class User extends Authenticatable implements FilamentUser
     use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
-        'name',
         'lastname',
         'firstname',
         'email',
@@ -32,6 +31,8 @@ class User extends Authenticatable implements FilamentUser
         'password',
         'remember_token',
     ];
+
+    protected $appends = ['name'];
 
     public function canAccessPanel(Panel $panel): bool
     {

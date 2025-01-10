@@ -14,21 +14,6 @@ class ServicesRelationManager extends RelationManager
 {
     protected static string $relationship = 'services';
 
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->readOnly(),
-                Forms\Components\TextInput::make('description')
-                    ->readOnly(),
-                Forms\Components\TextInput::make('price')
-                    ->readOnly()
-                    ->numeric()
-                    ->suffix('€'),
-            ]);
-    }
-
     public function table(Table $table): Table
     {
         return $table
@@ -37,19 +22,20 @@ class ServicesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('price')
+                    ->numeric()
                     ->suffix('€'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

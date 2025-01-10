@@ -1,29 +1,27 @@
 <?php
 
-namespace App\Filament\Resources\UserResource\RelationManagers;
+namespace App\Filament\Resources\ServiceResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ReservationsRelationManager extends RelationManager
+class UsersRelationManager extends RelationManager
 {
-    protected static string $relationship = 'reservations';
+    protected static string $relationship = 'users';
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('start_datetime')
+            ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('start_datetime')
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i'),
-                Tables\Columns\TextColumn::make('end_datetime')
-                    ->dateTime('d/m/Y H:i'),
-                Tables\Columns\TextColumn::make('rooms.name')
-                    ->badge()
-                    ->color('info'),
             ])
             ->filters([
                 //
@@ -32,8 +30,7 @@ class ReservationsRelationManager extends RelationManager
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                //
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

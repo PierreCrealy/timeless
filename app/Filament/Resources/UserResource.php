@@ -25,7 +25,9 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('firstname')
+                    ->required(),
+                Forms\Components\TextInput::make('lastname')
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -69,9 +71,7 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime('d/m/Y H:i'),
             ])
             ->filters([
                 //
