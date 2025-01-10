@@ -14,16 +14,6 @@ class RegistrationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'registrations';
 
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-            ]);
-    }
-
     public function table(Table $table): Table
     {
         return $table
@@ -33,11 +23,11 @@ class RegistrationsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('description')
                     ->wrap(),
                 Tables\Columns\TextColumn::make('start_datetime')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('capacity')
-                    ->numeric(),
+                    ->dateTime('d/m/Y H:i'),
+                Tables\Columns\TextColumn::make('capacity'),
                 Tables\Columns\TextColumn::make('price')
-                    ->money(),
+                    ->numeric()
+                    ->suffix('€'),
                 Tables\Columns\TextColumn::make('type.title')
                     ->badge()
                     ->color('primary'),
@@ -49,11 +39,10 @@ class RegistrationsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\CreateAction::make(),
+                //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                //
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

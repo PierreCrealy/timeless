@@ -28,20 +28,23 @@ class ActivityResource extends Resource
                 Forms\Components\TextInput::make('description')
                     ->required(),
                 Forms\Components\DateTimePicker::make('start_datetime')
+                    ->format('d/m/Y H:i')
                     ->required(),
                 Forms\Components\TextInput::make('capacity')
-                    ->required()
-                    ->numeric(),
+                    ->integer()
+                    ->required(),
                 Forms\Components\TextInput::make('price')
-                    ->required()
                     ->numeric()
-                    ->prefix('$'),
-                Forms\Components\TextInput::make('type_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('theme_id')
-                    ->required()
-                    ->numeric(),
+                    ->suffix('€')
+                    ->required(),
+                Forms\Components\Select::make('type_id')
+                    ->relationship('type', 'title')
+                    ->preload()
+                    ->required(),
+                Forms\Components\Select::make('theme_id')
+                    ->relationship('theme', 'title')
+                    ->preload()
+                    ->required(),
             ]);
     }
 
@@ -55,13 +58,13 @@ class ActivityResource extends Resource
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start_datetime')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('capacity')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money()
+                    ->suffix('€')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type.title')
                     ->badge()
@@ -71,14 +74,6 @@ class ActivityResource extends Resource
                     ->badge()
                     ->color('info')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

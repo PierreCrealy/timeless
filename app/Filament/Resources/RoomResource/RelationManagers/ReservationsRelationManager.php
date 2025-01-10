@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\FloorResource\RelationManagers;
+namespace App\Filament\Resources\RoomResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,32 +10,22 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class RoomsRelationManager extends RelationManager
+class ReservationsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'rooms';
+    protected static string $relationship = 'reservations';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->maxLength(255)
+                Forms\Components\DateTimePicker::make('start_datetime')
+                    ->format('d/m/Y H:i')
                     ->required(),
-                Forms\Components\TextInput::make('number')
-                    ->integer()
+                Forms\Components\DateTimePicker::make('end_datetime')
+                    ->format('d/m/Y H:i')
                     ->required(),
-                Forms\Components\TextInput::make('capacity')
-                    ->integer()
-                    ->required(),
-                Forms\Components\TextInput::make('price')
-                    ->numeric()
-                    ->suffix('€')
-                    ->required(),
-                Forms\Components\Toggle::make('status')
-                    ->label('Disponible ?')
-                    ->required(),
-                Forms\Components\Select::make('floor_id')
-                    ->relationship('floor', 'name')
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'lastname')
                     ->required(),
             ]);
     }
@@ -45,10 +35,13 @@ class RoomsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\IconColumn::make('status')
-                    ->label('Disponible ?')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('start_datetime')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('end_datetime')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
             ])
             ->filters([
                 //

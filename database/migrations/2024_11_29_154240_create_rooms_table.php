@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('price');
             $table->boolean('status');
 
-            $table->foreignId('floor_id')->constrained()->references('id')->on('floors');
+            $table->foreignId('floor_id')->constrained()->references('id')->on('floors')->onDelete('cascade');
 
             $table->timestamps();
         });
