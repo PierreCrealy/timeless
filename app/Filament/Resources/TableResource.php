@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TableResource\Pages;
 use App\Filament\Resources\TableResource\RelationManagers;
+use App\Filament\Resources\TableResource\RelationManagers\OrdersRelationManager;
 use App\Models\Table;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -83,7 +84,7 @@ class TableResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrdersRelationManager::class,
         ];
     }
 

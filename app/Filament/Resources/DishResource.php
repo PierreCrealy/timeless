@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DishResource\Pages;
 use App\Filament\Resources\DishResource\RelationManagers;
+use App\Filament\Resources\DishResource\RelationManagers\IngredientsRelationManager;
 use App\Models\Dish;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -92,7 +93,7 @@ class DishResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            IngredientsRelationManager::class,
         ];
     }
 

@@ -1,15 +1,6 @@
-$test = User::find(1);
-
-$test->getRolesName();
-$test = User::find(1);
-
-$test->getRoleNames();
-$test = User::find(1);
-
-$test->getRoleNames()->first();
-$test = User::find(2);
-
-
-$test = User::find(3);
-
-
+$test = Dish::find(1);
+$test->ingredients;
+$test = Dish::find(1);
+$test->bill;
+$test = Order::find(1);
+$test->bill;

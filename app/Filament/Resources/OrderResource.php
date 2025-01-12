@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResource\RelationManagers\BillRelationManager;
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -41,12 +42,18 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('status')
-                    ->formatStateUsing(fn ($state) => $state ? 'Payée' : 'Attente')
+                    ->formatStateUsing(fn ($state) => match ((int) $state) {
+                        0 => 'Attente',
+                        1 => 'Terminée',
+                        2 => 'Annulée',
+                        default => 'Inconnu',
+                    })
                     ->badge()
                     ->searchable()
                     ->colors([
-                        'danger' => fn ($state): bool => $state == 0,
+                        'warning' => fn ($state): bool => $state == 0,
                         'success' => fn ($state): bool => $state == 1,
+                        'danger' => fn ($state): bool => $state == 2,
                     ]),
                 Tables\Columns\TextColumn::make('bill_id')
                     ->numeric()
@@ -86,7 +93,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            BillRelationManager::class,
         ];
     }
 
