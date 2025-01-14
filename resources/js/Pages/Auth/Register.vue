@@ -7,7 +7,8 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -28,19 +29,34 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="firstname" value="firstname" />
 
                 <TextInput
-                    id="name"
+                    id="firstname"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
+                    v-model="form.firstname"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="firstname"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.firstname" />
+            </div>
+            <div>
+                <InputLabel for="lastname" value="lastname" />
+
+                <TextInput
+                    id="lastname"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.lastname"
+                    required
+                    autofocus
+                    autocomplete="lastname"
+                />
+
+                <InputError class="mt-2" :message="form.errors.lastname" />
             </div>
 
             <div class="mt-4">
@@ -107,7 +123,9 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Register
+                <template #texte>
+                    Inscription
+                </template>
                 </PrimaryButton>
             </div>
         </form>

@@ -23,6 +23,8 @@
     background: none;
     overflow: hidden;
     transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .custom-button::before {
@@ -35,12 +37,13 @@
     background: var(--primary-color);
     transform: skewX(-45deg);
     transition: left 0.3s;
-    z-index: 1;
+    z-index: 1; /* Le pseudo-élément est derrière */
 }
 
 .custom-button span {
     position: relative;
-    z-index: 2; 
+    z-index: 2; /* Le texte est toujours devant */
+    color: white; /* Garantit la visibilité du texte */
 }
 
 .custom-button:hover::before {
@@ -49,4 +52,8 @@
 
 .custom-button:hover {
     background: var(--primary-color);
+}
+
+router-link.custom-button {
+    text-decoration: none;
 }
