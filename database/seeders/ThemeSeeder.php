@@ -14,17 +14,17 @@ class ThemeSeeder extends Seeder
     public function run(): void
     {
         Theme::factory()->create([
-            'title' => 'Futuriste',
+            'title' => 'Futur',
             'description' => '...',
         ]);
 
         Theme::factory()->create([
-            'title' => 'Moyenne Age',
+            'title' => 'Moyen-Age',
             'description' => '...',
         ]);
 
         Theme::factory()->create([
-            'title' => 'Année 20',
+            'title' => 'Années 20',
             'description' => '...',
         ]);
     }

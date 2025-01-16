@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\IngredientResource\Pages;
-use App\Filament\Resources\IngredientResource\RelationManagers;
-use App\Models\Ingredient;
+use App\Filament\Resources\BillResource\Pages;
+use App\Filament\Resources\BillResource\RelationManagers;
+use App\Filament\Resources\BillResource\RelationManagers\OrderRelationManager;
+use App\Models\Bill;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,31 +14,26 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class IngredientResource extends Resource
+class BillResource extends Resource
 {
-    protected static ?string $model = Ingredient::class;
-    protected static ?string $navigationIcon = 'heroicon-o-beaker';
+    protected static ?string $model = Bill::class;
     protected static ?string $navigationGroup = 'Restaurant';
+    protected static ?string $navigationIcon = 'heroicon-o-calculator';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('reference')
                     ->required(),
-                Forms\Components\TextInput::make('description'),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->suffix('€'),
-                Forms\Components\DateTimePicker::make('delivery_date')
-                    ->format('d/m/Y H:i')
-                    ->required(),
-                Forms\Components\TextInput::make('stock')
+                Forms\Components\DateTimePicker::make('pay_date'),
+                Forms\Components\Textarea::make('pay_method')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('origin')
-                    ->required(),
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -45,29 +41,15 @@ class IngredientResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->wrap()
+                Tables\Columns\TextColumn::make('reference')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     // ->money('eur')
                     ->suffix('€')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('delivery_date')
-                    ->dateTime('d/m/Y H:i')
+                Tables\Columns\TextColumn::make('pay_date')
+                    ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('stock')
-                    ->badge()
-                    ->numeric()
-                    ->sortable()
-                    ->colors([
-                        'danger' => static fn ($state): bool => $state <= 3, // Rouge si le stock est < 3
-                        'warning' => static fn ($state): bool => $state > 3 && $state < 10, // Orange si stock < 10
-                        'info' => static fn ($state): bool => $state >= 10, // Bleu si stock >= 10
-                    ]),
-                Tables\Columns\TextColumn::make('origin')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -93,16 +75,16 @@ class IngredientResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrderRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListIngredients::route('/'),
-            'create' => Pages\CreateIngredient::route('/create'),
-            'edit' => Pages\EditIngredient::route('/{record}/edit'),
+            'index' => Pages\ListBills::route('/'),
+            'create' => Pages\CreateBill::route('/create'),
+            'edit' => Pages\EditBill::route('/{record}/edit'),
         ];
     }
 }

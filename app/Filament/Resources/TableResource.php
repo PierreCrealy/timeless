@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DishResource\Pages;
-use App\Filament\Resources\DishResource\RelationManagers;
-use App\Filament\Resources\DishResource\RelationManagers\IngredientsRelationManager;
-use App\Models\Dish;
+use App\Filament\Resources\TableResource\Pages;
+use App\Filament\Resources\TableResource\RelationManagers;
+use App\Filament\Resources\TableResource\RelationManagers\OrdersRelationManager;
+use App\Models\Table;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
+use Filament\Tables\Table as Tabl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class DishResource extends Resource
+class TableResource extends Resource
 {
-    protected static ?string $model = Dish::class;
-    protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
+    protected static ?string $model = Table::class;
     protected static ?string $navigationGroup = 'Restaurant';
+    protected static ?string $navigationIcon = 'heroicon-c-viewfinder-circle';
 
     public static function form(Form $form): Form
     {
@@ -26,48 +26,39 @@ class DishResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
-                Forms\Components\TextInput::make('description')
-                    ->required(),
-                Forms\Components\TextInput::make('price')
+                Forms\Components\TextInput::make('capacity')
                     ->required()
-                    ->numeric()
-                    ->suffix('€'),
+                    ->numeric(),
                 Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\Select::make('menu_id')
-                    ->relationship('menu', 'id')
                     ->required(),
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tabl $table): Tabl
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->wrap()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money('eur')
+                Tables\Columns\TextColumn::make('capacity')
+                    ->numeric()
+                    ->badge()
+                    ->color('info')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->formatStateUsing(fn ($state) => $state ? 'Disponible' : 'Indisponible')
+                ->formatStateUsing(fn ($state) => match ((int) $state) {
+                    0 => 'Indisponible',
+                    1 => 'Disponible',
+                    2 => 'En attente',
+                    default => 'Inconnu',
+                })
                     ->badge()
                     ->searchable()
                     ->colors([
-                        'danger' => fn ($state): bool => $state == 0,
-                        'success' => fn ($state): bool => $state == 1,
+                        'danger' => static fn ($state): bool => $state == 0,
+                        'success' => static fn ($state): bool => $state == 1,
+                        'warning' => static fn ($state): bool => $state == 2,
                     ]),
-                Tables\Columns\TextColumn::make('menu.name')
-                    ->badge()
-                    ->color('info')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('menu.theme.title')
-                    ->badge()
-                    ->color('info')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -93,16 +84,16 @@ class DishResource extends Resource
     public static function getRelations(): array
     {
         return [
-            IngredientsRelationManager::class,
+            OrdersRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDishes::route('/'),
-            'create' => Pages\CreateDish::route('/create'),
-            'edit' => Pages\EditDish::route('/{record}/edit'),
+            'index' => Pages\ListTables::route('/'),
+            'create' => Pages\CreateTable::route('/create'),
+            'edit' => Pages\EditTable::route('/{record}/edit'),
         ];
     }
 }

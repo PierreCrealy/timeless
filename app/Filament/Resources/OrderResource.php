@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DishResource\Pages;
-use App\Filament\Resources\DishResource\RelationManagers;
-use App\Filament\Resources\DishResource\RelationManagers\IngredientsRelationManager;
-use App\Models\Dish;
+use App\Filament\Resources\OrderResource\Pages;
+use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResource\RelationManagers\BillRelationManager;
+use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,29 +14,26 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class DishResource extends Resource
+class OrderResource extends Resource
 {
-    protected static ?string $model = Dish::class;
-    protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
+    protected static ?string $model = Order::class;
     protected static ?string $navigationGroup = 'Restaurant';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('description')
-                    ->required(),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->suffix('€'),
                 Forms\Components\TextInput::make('status')
                     ->required(),
-                Forms\Components\Select::make('menu_id')
-                    ->relationship('menu', 'id')
+                Forms\Components\TextInput::make('bill_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\Select::make('table_id')
                     ->required(),
+                Forms\Components\TextInput::make('room_id')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -44,30 +41,33 @@ class DishResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->wrap()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money('eur')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->formatStateUsing(fn ($state) => $state ? 'Disponible' : 'Indisponible')
+                    ->formatStateUsing(fn ($state) => match ((int) $state) {
+                        0 => 'Attente',
+                        1 => 'Terminée',
+                        2 => 'Annulée',
+                        default => 'Inconnu',
+                    })
                     ->badge()
                     ->searchable()
                     ->colors([
-                        'danger' => fn ($state): bool => $state == 0,
+                        'warning' => fn ($state): bool => $state == 0,
                         'success' => fn ($state): bool => $state == 1,
+                        'danger' => fn ($state): bool => $state == 2,
                     ]),
-                Tables\Columns\TextColumn::make('menu.name')
-                    ->badge()
-                    ->color('info')
+                Tables\Columns\TextColumn::make('bill_id')
+                    ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('menu.theme.title')
+                Tables\Columns\TextColumn::make('table.id')
+                    ->numeric()
                     ->badge()
-                    ->color('info')
-                    ->sortable(),
+                    ->sortable()
+                    ->color('info'),
+                Tables\Columns\TextColumn::make('room_id')
+                    ->numeric()
+                    ->badge()
+                    ->sortable()
+                    ->color('info'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -93,16 +93,16 @@ class DishResource extends Resource
     public static function getRelations(): array
     {
         return [
-            IngredientsRelationManager::class,
+            BillRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDishes::route('/'),
-            'create' => Pages\CreateDish::route('/create'),
-            'edit' => Pages\EditDish::route('/{record}/edit'),
+            'index' => Pages\ListOrders::route('/'),
+            'create' => Pages\CreateOrder::route('/create'),
+            'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
     }
 }
