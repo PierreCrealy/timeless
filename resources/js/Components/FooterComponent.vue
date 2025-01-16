@@ -4,7 +4,6 @@ import instagramLogo from '@images/footer/instagram-logo.png';
 import facebookLogo from '@images/footer/facebook-logo.png';
 import twitterLogo from '@images/footer/twitter-logo.png';
 
-import NavLink from '@/Components/NavLink.vue';
 </script>
 <template>
     <!-- Footer Section -->

@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ProfileDropdown from '@/Components/ProfileDropdown.vue';
 
 import imageTime from '@images/headerTimeless.webp';
+import flecheBlanche from '@images/test2.svg';
 import logo from '@images/logo.png';
 
 import { useRedirectRoute } from '@/composables/useRedirectRoute';
+
+const slots = defineSlots();
+
+const href = computed(() => {
+  return slots.href ? slots.href()[0].children : '#';
+});
 </script>
 
 <template>
@@ -19,7 +26,7 @@ import { useRedirectRoute } from '@/composables/useRedirectRoute';
                         Home
                     </a>
                     <a :href="route('about')" :active="route().current('about')" class="block text-gray-900 hover:bg-gray-100 py-2 px-3 rounded md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">
-                        About
+                        A propos
                     </a>
                 </div>
 
@@ -64,6 +71,9 @@ import { useRedirectRoute } from '@/composables/useRedirectRoute';
                     </PrimaryButton>
                 </div>
             </div>
+            <a :href="href">
+                <img :src="flecheBlanche" alt="flèche blanche" class="absolute bottom-0 mt-3 left-1/2 transform -translate-x-1/2">
+            </a>
         </div>
     </div>
 </template>
