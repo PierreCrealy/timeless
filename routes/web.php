@@ -21,6 +21,7 @@ Route::get('/welcome', function () {
 
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
@@ -39,5 +40,9 @@ Route::get('/service', function () {
 Route::get('/contactUs', function () {
     return Inertia::render('Static/ContactUs');
 })->name('contactUs');
+
+Route::get('/pageUnderDevelopment', function () {
+    return Inertia::render('Static/pageUnderDevelopment');
+})->name('pageUnderDevelopment');
 
 require __DIR__.'/auth.php';

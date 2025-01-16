@@ -27,12 +27,12 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
             <p class="text-center mb-4 mt-10 font-size-40px fontSegoeUIItalic">Si vous avez la moindre questions, <br> Merci de nous envoyer un message via le formulaire</p>
-            <form class="space-y-4">
+            <form class="space-y-4 text-center">
                 <input type="text" placeholder="Votre nom" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
                 <input type="email" placeholder="Votre Email" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
                 <input type="text" placeholder="Sujet de l'email" class="w-full p-2 bg-gray-800 border border-gray-600 rounded">
                 <textarea style="resize: none;" placeholder="Corps du message" class="w-full p-2 bg-gray-800 border border-gray-600 rounded h-24"></textarea>
-                <button type="submit" class="w-full p-2 bg-yellow-500 text-black font-bold rounded">ENVOYER</button>
+                <button type="submit" class="w-48 p-2 backgroundPrimaryColor text-black font-bold rounded">ENVOYER</button>
             </form>
         </div>
     </section>

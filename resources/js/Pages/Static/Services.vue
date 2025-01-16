@@ -27,7 +27,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
                 <h1 class="font-size-40px font-bold primaryColor mb-4">AMBIANCES D'ÉPOQUE</h1>
                 <p class="font-size-24px mb-8 greyColor">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                 <div class="flex justify-center md:justify-start">
-                    <a href="#" class="primaryColor underline">En savoir plus</a>
+                    <a :href="route('pageUnderDevelopment')" class="primaryColor underline">En savoir plus</a>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
             <div class="md:w-1/2 p-4">
                 <h2 class="font-size-40px font-extrabold text-yellow-500 mb-2">ACTIVITÉS</h2>
                 <p class="font-size-24px mb-4 greyColor">Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                <a href="#" class="text-yellow-500 underline hover:text-yellow-300">En savoir plus</a>
+                <a :href="route('pageUnderDevelopment')" class="text-yellow-500 underline hover:text-yellow-300">En savoir plus</a>
             </div>
             <div class="md:w-1/2 mb-4 md:mb-0 md:ml-8">
                 <img :src="ambianceEpoque" alt="Activités" class="w-full h-64 md:h-auto object-cover rounded-lg shadow-lg">
@@ -52,7 +52,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
             <div class="md:w-1/2 p-4">
                 <h2 class="font-size-40px font-extrabold text-yellow-500 mb-2">RESTAURANT GASTRONOMIQUE</h2>
                 <p class="font-size-24px mb-4 greyColor">Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                <a href="#" class="text-yellow-500 underline hover:text-yellow-300">En savoir plus</a>
+                <a :href="route('pageUnderDevelopment')" class="text-yellow-500 underline hover:text-yellow-300">En savoir plus</a>
             </div>
         </div>
     </section>

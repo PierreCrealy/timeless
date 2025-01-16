@@ -59,4 +59,31 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+     /**
+
+     * Write code on Method
+
+     *
+
+     * @return response()
+
+     */
+
+     public function updateAvatar(ProfileUpdateRequest $request)
+     {
+        $data = $request->validated();
+
+        $imageName = '';
+        if ($image = $request->file('image')){
+            $imageName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $image->move('storage/images', $imageName);
+        }
+        $user = $request->user();
+        $user->avatar = $imageName;
+        $user->save();
+
+        return redirect()->back();
+    }
+
 }

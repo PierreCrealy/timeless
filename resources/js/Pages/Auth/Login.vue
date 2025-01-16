@@ -31,6 +31,15 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in" />
 
+        <Link
+            :href="route('dashboard')"
+            class="rounded-md primaryColor underline"
+        >
+            <- Retour
+        </Link>
+
+        <div class="mb-8"></div>
+        
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
@@ -76,21 +85,23 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex flex-col items-center">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 mb-4"
                 >
-                    Forgot your password?
+                    Vous avez oublié votre mot de passe ?
                 </Link>
 
                 <PrimaryButton
+                    class="w-48  ml-48"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     <template #texte>
-                        <span>Se connecter</span></template>
+                        Se connecter
+                    </template>
                 </PrimaryButton>
             </div>
         </form>

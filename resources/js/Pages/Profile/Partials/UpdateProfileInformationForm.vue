@@ -4,7 +4,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 import { useFormattedDate } from '@/composables/useFormatedDate';
 
@@ -19,11 +19,13 @@ const form = useForm({
     lastname: user.lastname,
     firstname: user.firstname,
     email: user.email,
+    avatar: user.avatar
 });
 
 
 const passwordInput = ref<HTMLInputElement | null>(null);
 const currentPasswordInput = ref<HTMLInputElement | null>(null);
+const fileInput = ref<HTMLInputElement | null>(null);
 
 const formPassword = useForm({
     current_password: '',
@@ -49,22 +51,21 @@ const updatePassword = () => {
         },
     });
 };
+
+
 </script>
 
 <template>
     <section class="backgroundColor text-white flex items-center justify-center min-h-screen ">
         <div class="bg-gray-800 rounded-lg p-8 max-w-4xl w-full mx-auto space-y-8">
             <a :href="route('dashboard')">retour</a>
-
+            <img class="image rounded-circle"  alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
             <!-- Profile Picture Section -->
-            <div class="flex items-center justify-between">
-                
-                <div class="flex items-center space-x-4">
-                    <img class="w-16 h-16 rounded-full" src="https://via.placeholder.com/150" alt="Avatar">
-                    
-                </div>
-                <button class="text-blue-500 hover:text-blue-700">Edit</button>
-            </div>
+            <form @submit.prevent="form.post(route('profile.updateAvatar'))" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" class="form-control">
+                <button type="submit">Submit</button>
+            </form>
+            
     
             <!-- Personal Information Section -->
             <div class="space-y-4">

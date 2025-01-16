@@ -17,6 +17,7 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.0/dist/flowbite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.0/flowbite.min.js"></script>
+
     </body>
 </html>

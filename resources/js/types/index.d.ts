@@ -6,6 +6,7 @@ export interface User {
     email_verified_at?: string;
     created_at?: Date;
     updated_at?: Date;
+    avatar?: string;
 }
 
 export type PageProps<

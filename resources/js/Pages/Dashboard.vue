@@ -6,7 +6,7 @@ import { Head } from '@inertiajs/vue3';
 
 //Import images
 
-import activityTimeless from '@images/dashboard/activiteHotel.jpeg';
+import activityTimeless from '@images/dashboard/activiteHotel.png';
 import beforeNine from '@images/dashboard/1900Century.png';
 import moyenAge from '@images/dashboard/moyenAge.png';
 import future from '@images/dashboard/future.png';
@@ -38,7 +38,7 @@ import future from '@images/dashboard/future.png';
                         <img :src="moyenAge" alt="Gallery 1" class="w-full h-64 object-cover">
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
                             <div class="flex-1 flex items-center justify-center">
-                                <h3 class="fontSegoeUIBold text-white font-size-33px">Moyen Age</h3>
+                                <h3 class="fontSegoeUIBold text-white font-size-33px">Moyen-Age</h3>
                             </div>
                             <div class="mt-auto mb-4">
                                 <PrimaryButton>
@@ -54,7 +54,7 @@ import future from '@images/dashboard/future.png';
                         <img :src="beforeNine" alt="Gallery 2" class="w-full h-64 object-cover">
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
                             <div class="flex-1 flex items-center justify-center">
-                                <h3 class="fontSegoeUIBold text-white font-size-33px">Année 80</h3>
+                                <h3 class="fontSegoeUIBold text-white font-size-33px">Année 20</h3>
                             </div>
                             <div class="mt-auto mb-4">
                                 <PrimaryButton>

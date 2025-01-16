@@ -1,52 +1,58 @@
 <template>
-    <div v-if="$page.props.auth.user">
-        <button
-            type="button"
-            class="flex ml-10 text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-            @click="toggleDropdown"
-        >
-            <span class="sr-only">Open user menu</span>
-            <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
-        </button>
-
-        <!-- Dropdown menu -->
-        <div
-            v-if="isDropdownOpen"
-            class="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="user-dropdown"
-        >
-            <div class="px-4 py-3">
-                <span class="block text-sm text-gray-900 dark:text-white">{{ $page.props.auth.user.firstname }} {{ $page.props.auth.user.lastname }}</span>
-                <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ $page.props.auth.user.email }}</span>
-            </div>
-            <ul class="py-2" aria-labelledby="user-menu-button">
-                <li>
-                    <DropdownLink :href="route('profile.edit')">Profile</DropdownLink>
-                </li>
-                <li>
-                    <form method="POST" :action="route('logout')">
-                    <input type="hidden" name="_token" :value="csrfToken">
-                    <button type="submit">
-                        Déconnexion
-                    </button>
-                </form>
-                </li>
-            </ul>
+    <div v-if="$page.props.auth.user" class="relative">
+      <img
+        id="avatarButton"
+        class="w-10 h-10 rounded-full cursor-pointer"
+        :src="'/avatars/' + $page.props.auth.user.avatar"
+        alt="User dropdown"
+        @click="toggleDropdown"
+      />
+      <!-- Dropdown menu -->
+      <div
+        v-if="isDropdownVisible"
+        id="userDropdown"
+        class="absolute right-0 z-10 divide-y divide-gray-100 rounded-lg shadow w-52 bg-white dark:bg-gray-800 dark:divide-gray-600"
+      >
+        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+          <div>{{ $page.props.auth.user.firstname }} {{ $page.props.auth.user.lastname }}</div>
+          <div class="font-medium truncate">{{ $page.props.auth.user.email }}</div>
         </div>
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+          <li>
+            <a :href="route('profile.edit')" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+          </li>
+        </ul>
+        <div class="py-1">
+          <form method="POST" :action="route('logout')">
+            <input type="hidden" name="_token" :value="csrfToken" />
+            <button type="submit" class="block px-4 py-2 w-full text-sm text-gray-700 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+              Déconnexion
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-</template>
+  </template>
+  
+  <script>
+  import { ref } from 'vue';
+  
+  export default {
+    setup() {
+      const isDropdownVisible = ref(false);
+  
+      const toggleDropdown = () => {
+        isDropdownVisible.value = !isDropdownVisible.value;
+      };
 
-<script setup lang="ts">
-import { ref } from 'vue';
-import DropdownLink from '@/Components/DropdownLink.vue'; // Assurez-vous que ce composant existe
-
-const isDropdownOpen = ref(false);
-const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-const toggleDropdown = () => {
-    isDropdownOpen.value = !isDropdownOpen.value;
-};
-
-
-</script>
+      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+  
+      return {
+        isDropdownVisible,
+        toggleDropdown,
+        csrfToken
+      };
+    },
+  };
+  </script>
+  

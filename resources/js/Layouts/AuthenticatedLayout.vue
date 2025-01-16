@@ -1,26 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ProfileDropdown from '@/Components/ProfileDropdown.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
 
-const showingNavigationDropdown = ref(false);
-import imageTime from '@images/headerTimeless.png';
+import imageTime from '@images/headerTimeless.webp';
 import logo from '@images/logo.png';
 
-const redirect = (path: string) => {
-    window.location.href = path;
-};
+import { useRedirectRoute } from '@/composables/useRedirectRoute';
 </script>
 
 <template>
     <div class="min-h-screen bg-cover bg-center" :style="{ backgroundImage: `url(${imageTime})` }">
         <nav class="fixed w-full z-20 top-0 start-0">
-            <div class="max-w-screen-xl mx-auto p-4 flex items-center justify-between relative">
+            <div class="max-w-screen-xl mx-auto pt-4 flex items-center justify-between relative">
                 <!-- Navigation Links (Gauche) -->
                 <div class="flex space-x-8 rtl:space-x-reverse text-2xl">
                     <a :href="route('dashboard')" :active="route().current('dashboard')" class="mr-32 block text-gray-900 hover:bg-gray-100 py-2 px-3 rounded md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">
@@ -35,7 +27,7 @@ const redirect = (path: string) => {
                 <div class="absolute inset-x-0 top-0 flex justify-center pointer-events-none">
                     <a :href="route('dashboard')" :active="route().current('dashboard')" class="flex items-center bg-white rounded-b-lg shadow-md" style="width: 300px; padding: 10px;">
                         <div class="flex justify-center items-center">
-                            <img :src="logo" class="ml-20 h-20" alt="Logo">
+                            <img :src="logo" class="ml-24 h-20" alt="Logo">
                         </div>
                     </a>
                 </div>
@@ -49,7 +41,7 @@ const redirect = (path: string) => {
                         Contact
                     </a>
 
-                    <ProfileDropdown/>
+                    <ProfileDropdown class="ml-10"/>
                 </div>
             </div>
         </nav>
@@ -64,10 +56,10 @@ const redirect = (path: string) => {
                     <slot name="subtitle"></slot>
                 </p>
                 <div class="mt-10" v-if="route().current() === 'dashboard' && !$page.props.auth.user">
-                    <PrimaryButton @click="redirect('/register')" class="mr-10">
+                    <PrimaryButton @click="useRedirectRoute('/register')" class="mr-10">
                         <template #texte>Inscription</template>
                     </PrimaryButton>
-                    <PrimaryButton @click="redirect('/login')">
+                    <PrimaryButton @click="useRedirectRoute('/login')">
                         <template #texte>Connexion</template>
                     </PrimaryButton>
                 </div>

@@ -26,15 +26,23 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Register" />
+        <Link
+            :href="route('dashboard')"
+            class="rounded-md primaryColor underline"
+        >
+            <- Retour
+        </Link>
+
+        <div class="mb-8"></div>
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="firstname" value="firstname" />
+                <InputLabel for="firstname" value="Prénom" />
 
                 <TextInput
                     id="firstname"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mb-3 block w-full"
                     v-model="form.firstname"
                     required
                     autofocus
@@ -44,7 +52,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.firstname" />
             </div>
             <div>
-                <InputLabel for="lastname" value="lastname" />
+                <InputLabel for="lastname" value="Nom" />
 
                 <TextInput
                     id="lastname"
@@ -75,7 +83,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Mot de passe" />
 
                 <TextInput
                     id="password"
@@ -92,7 +100,7 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Confirmer le mot de passe"
                 />
 
                 <TextInput
@@ -110,16 +118,16 @@ const submit = () => {
                 />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex items-center flex-col justify-end">
                 <Link
                     :href="route('login')"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                 >
-                    Already registered?
+                    Vous avez oublié votre mot de passe ?
                 </Link>
 
                 <PrimaryButton
-                    class="ms-4"
+                    class="ms-4 ml-64 mt-5"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
