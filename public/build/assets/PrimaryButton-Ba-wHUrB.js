@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o,g as s,b as n,r}from"./app-CV1dgX2-.js";const c={},a={class:"text-white custom-button fontSegoeUI font-size-24px"};function _(t,f){return o(),s("button",a,[n("span",null,[r(t.$slots,"texte")])])}const m=e(c,[["render",_]]);export{m as P};
