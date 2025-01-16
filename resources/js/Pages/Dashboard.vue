@@ -6,10 +6,12 @@ import { Head } from '@inertiajs/vue3';
 
 //Import images
 
-import activityTimeless from '@images/dashboard/activiteHotel.jpeg';
+import activityTimeless from '@images/dashboard/activiteHotel.png';
 import beforeNine from '@images/dashboard/1900Century.png';
 import moyenAge from '@images/dashboard/moyenAge.png';
 import future from '@images/dashboard/future.png';
+
+import { useRedirectRoute } from '@/composables/useRedirectRoute';
 </script>
 
 <template>
@@ -18,8 +20,9 @@ import future from '@images/dashboard/future.png';
     <AuthenticatedLayout>
         <template #title>TimeLess</template>
         <template #subtitle>Bienvenue à Timeless, l’hôtel-restaurant où passé, présent et futur se rencontrent.</template>
+        <template #href>#about</template>
     </AuthenticatedLayout>
-
+    
     <!-- About Section -->
     <section id="about" class="py-20 backgroundColor" >
         <div class="container mx-auto px-6 text-center">
@@ -38,10 +41,10 @@ import future from '@images/dashboard/future.png';
                         <img :src="moyenAge" alt="Gallery 1" class="w-full h-64 object-cover">
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
                             <div class="flex-1 flex items-center justify-center">
-                                <h3 class="fontSegoeUIBold text-white font-size-33px">Moyen Age</h3>
+                                <h3 class="fontSegoeUIBold text-white font-size-33px">Moyen-Age</h3>
                             </div>
                             <div class="mt-auto mb-4">
-                                <PrimaryButton>
+                                <PrimaryButton @click="useRedirectRoute('/pageUnderDevelopment')">
                                     <template #texte>Découvrir</template>
                                 </PrimaryButton>
                             </div>
@@ -54,10 +57,10 @@ import future from '@images/dashboard/future.png';
                         <img :src="beforeNine" alt="Gallery 2" class="w-full h-64 object-cover">
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
                             <div class="flex-1 flex items-center justify-center">
-                                <h3 class="fontSegoeUIBold text-white font-size-33px">Année 80</h3>
+                                <h3 class="fontSegoeUIBold text-white font-size-33px">Année 20</h3>
                             </div>
                             <div class="mt-auto mb-4">
-                                <PrimaryButton>
+                                <PrimaryButton @click="useRedirectRoute('/pageUnderDevelopment')">
                                     <template #texte>Découvrir</template>
                                 </PrimaryButton>
                             </div>
@@ -73,7 +76,7 @@ import future from '@images/dashboard/future.png';
                                 <h3 class="fontSegoeUIBold text-white font-size-33px">Futur</h3>
                             </div>
                             <div class="mt-auto mb-4">
-                                <PrimaryButton>
+                                <PrimaryButton @click="useRedirectRoute('/pageUnderDevelopment')">
                                     <template #texte>Découvrir</template>
                                 </PrimaryButton>
                             </div>
@@ -110,7 +113,7 @@ import future from '@images/dashboard/future.png';
         <div class="container mx-auto px-6 text-center relative z-10">
             <h2 class="font-size-128px font-bold mb-4 fontPrimaryTitle primaryColor">NOS ACTIVITÉS</h2>
             <p class="font-size-33px text-white fontSegoeUIItalic mb-48">Voyagez à travers le temps grâce à nos activités uniques de notre hôtel. Téléportez-vous avec plaisir dans notre salle unique, équipée.</p>
-            <PrimaryButton>
+            <PrimaryButton @click="useRedirectRoute('/pageUnderDevelopment')">
                 <template #texte>Découvrir</template>
             </PrimaryButton>
         </div>

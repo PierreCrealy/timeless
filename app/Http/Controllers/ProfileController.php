@@ -19,7 +19,6 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
     }
@@ -37,7 +36,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('dashboard');
     }
 
     /**
@@ -60,4 +59,31 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+     /**
+
+     * Write code on Method
+
+     *
+
+     * @return response()
+
+     */
+
+     public function updateAvatar(ProfileUpdateRequest $request)
+     {
+        $data = $request->validated();
+
+        $imageName = '';
+        if ($image = $request->file('image')){
+            $imageName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $image->move('storage/images', $imageName);
+        }
+        $user = $request->user();
+        $user->avatar = $imageName;
+        $user->save();
+
+        return redirect()->back();
+    }
+
 }

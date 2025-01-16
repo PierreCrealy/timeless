@@ -4,7 +4,6 @@ import instagramLogo from '@images/footer/instagram-logo.png';
 import facebookLogo from '@images/footer/facebook-logo.png';
 import twitterLogo from '@images/footer/twitter-logo.png';
 
-import NavLink from '@/Components/NavLink.vue';
 </script>
 <template>
     <!-- Footer Section -->
@@ -21,15 +20,11 @@ import NavLink from '@/Components/NavLink.vue';
                 <div class="w-full md:w-1/3 px-2 mb-4">
                     <h3 class="text-xl font-bold text-white mb-4">En savoir plus</h3>
                     <ul>
-                        <li>
-                            <NavLink :href="route('dashboard')" :active="route().current('about')">
-                                <span class="text-white hover:primaryColor">A Propos</span>
-                            </NavLink>
-                        </li>
-                        <li><a href="#" class="text-white hover:text-yellow-600">Moyen Age</a></li>
-                        <li><a href="#" class="text-white hover:text-yellow-600">Année 80</a></li>
-                        <li><a href="#" class="text-white hover:text-yellow-600">Future</a></li>
-                        <li><a href="#" class="text-white hover:text-yellow-600">Nos activités</a></li>
+                        <li><a class="text-white hover:primaryColor" :href="route('about')">A propos</a></li>
+                        <li><a :href="route('pageUnderDevelopment')" class="text-white hover:text-yellow-600">Moyen-Age</a></li>
+                        <li><a :href="route('pageUnderDevelopment')" class="text-white hover:text-yellow-600">Année 20</a></li>
+                        <li><a :href="route('pageUnderDevelopment')" class="text-white hover:text-yellow-600">Futur</a></li>
+                        <li><a :href="route('pageUnderDevelopment')" class="text-white hover:text-yellow-600">Nos activités</a></li>
                     </ul>
                 </div>
                 
@@ -43,11 +38,11 @@ import NavLink from '@/Components/NavLink.vue';
                 
                 <div class="w-full md:w-1/3 px-2 mb-4">
                     <h3 class="text-xl font-bold text-white mb-4">Réseaux Sociaux</h3>
-                    <div class="flex justify-evenly mt-6">
-                        <a href="#" class="text-white hover:text-yellow-600 mx-2">
+                    <div class="flex mt-6">
+                        <a href="#" class="text-white hover:text-yellow-600 mx-2 mr-7">
                             <img :src="facebookLogo" alt="Facebook">
                         </a>
-                        <a href="#" class="text-white hover:text-yellow-600 mx-2">
+                        <a href="#" class="text-white hover:text-yellow-600 mx-2 mr-7">
                             <img :src="instagramLogo" alt="Instagram">
                         </a>
                         <a href="#" class="text-white hover:text-yellow-600 mx-2">

@@ -4,6 +4,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { ref, useTemplateRef } from 'vue';
+
+import { useFormattedDate } from '@/composables/useFormatedDate';
 
 defineProps<{
     mustVerifyEmail?: Boolean;
@@ -13,81 +16,131 @@ defineProps<{
 const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: user.name,
+    lastname: user.lastname,
+    firstname: user.firstname,
     email: user.email,
+    avatar: user.avatar
 });
+
+
+const passwordInput = ref<HTMLInputElement | null>(null);
+const currentPasswordInput = ref<HTMLInputElement | null>(null);
+const fileInput = ref<HTMLInputElement | null>(null);
+
+const formPassword = useForm({
+    current_password: '',
+    password: '',
+    password_confirmation: '',
+});
+
+const updatePassword = () => {
+    form.put(route('password.update'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset();
+        },
+        onError: () => {
+            if (formPassword.errors.password) {
+                formPassword.reset('password', 'password_confirmation');
+                passwordInput.value?.focus();
+            }
+            if (formPassword.errors.current_password) {
+                formPassword.reset('current_password');
+                currentPasswordInput.value?.focus();
+            }
+        },
+    });
+};
+
+
 </script>
 
 <template>
-    <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Profile Information
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update your account's profile information and email address.
-            </p>
-        </header>
-
-        <form
+    <section class="backgroundColor text-white flex items-center justify-center min-h-screen ">
+        <div class="bg-gray-800 rounded-lg p-8 max-w-4xl w-full mx-auto space-y-8">
+            <a :href="route('dashboard')">retour</a>
+            <img class="image rounded-circle"  alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+            <!-- Profile Picture Section -->
+            <form @submit.prevent="form.post(route('profile.updateAvatar'))" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" class="form-control">
+                <button type="submit">Submit</button>
+            </form>
+            
+    
+            <!-- Personal Information Section -->
+            <div class="space-y-4">
+                <form
             @submit.prevent="form.patch(route('profile.update'))"
             class="mt-6 space-y-6"
         >
-            <div>
-                <InputLabel for="name" value="Name" />
-
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="mt-2 text-sm text-gray-800 dark:text-gray-200">
-                    Your email address is unverified.
-                    <Link
-                        :href="route('verification.send')"
-                        method="post"
-                        as="button"
-                        class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
-                    >
-                        Click here to re-send the verification email.
-                    </Link>
-                </p>
-
-                <div
-                    v-show="status === 'verification-link-sent'"
-                    class="mt-2 text-sm font-medium text-green-600 dark:text-green-400"
-                >
-                    A new verification link has been sent to your email address.
+                <h3 class="text-xl font-semibold">Personal information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="text-lg font-semibold">Prénom</h4>
+                        <input
+                            id="firstname"
+                            type="text"
+                            class="mt-1 block w-full bg-gray-700 text-white border border-gray-600 rounded p-2"
+                            v-model="form.firstname"
+                            required
+                            autofocus
+                            autocomplete="firstname"
+                        />
+                        <div class="mt-2 text-sm text-red-600" v-if="form.errors.firstname">
+                            {{ form.errors.firstname }}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold">Nom</h4>
+                        <input
+                            id="lastname"
+                            type="text"
+                            class="mt-1 block w-full bg-gray-700 text-white border border-gray-600 rounded p-2"
+                            v-model="form.lastname"
+                            required
+                            autofocus
+                            autocomplete="lastname"
+                        />
+                        <div class="mt-2 text-sm text-red-600" v-if="form.errors.lastname">
+                            {{ form.errors.lastname }}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold">Adresse Email</h4>
+                        <input
+                            id="lastname"
+                            type="text"
+                            class="mt-1 block w-full bg-gray-700 text-white border border-gray-600 rounded p-2"
+                            v-model="form.email"
+                            required
+                            autofocus
+                            autocomplete="lastname"
+                        />
+                        <div class="mt-2 text-sm text-red-600" v-if="form.errors.email">
+                            {{ form.errors.email }}
+                        </div>
+                    </div>
                 </div>
-            </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold"></h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold">Crée le</h4>
+                        <p>{{ useFormattedDate(user.created_at) }}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold">Modifié le</h4>
+                        <p>{{ useFormattedDate(user.updated_at) }}</p>
+                    </div>
+                </div>
 
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <div class="flex items-center gap-4">
+                <PrimaryButton :disabled="form.processing">
+                    <template #texte>Sauvegarder le profil</template>
+                </PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -99,10 +152,66 @@ const form = useForm({
                         v-if="form.recentlySuccessful"
                         class="text-sm text-gray-600 dark:text-gray-400"
                     >
-                        Saved.
+                        Sauvegardé.
                     </p>
                 </Transition>
             </div>
-        </form>
+            </form>
+            </div>
+    
+            <!-- Account Settings Section -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-semibold">Modification de mot de passe</h3>
+                <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-lg font-semibold">Votre mot de passe actuel</h4>
+                            <TextInput
+                                id="current_password"
+                                ref="passwordInput"
+                                v-model="formPassword.current_password"
+                                type="password"
+                                class="mt-1 block w-full"
+                                autocomplete="new-password"
+                            />
+
+                            <InputError :message="formPassword.errors.current_password" class="mt-2" />
+                        </div>
+                        <div></div>
+                        <div>
+                            <h4 class="text-lg font-semibold">Nouveau Mot de passe</h4>
+                            <TextInput
+                                id="password"
+                                ref="passwordInput"
+                                v-model="formPassword.password"
+                                type="password"
+                                class="mt-1 block w-full"
+                                autocomplete="new-password"
+                            />
+
+                            <InputError :message="formPassword.errors.password" class="mt-2" />
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold">Confirmation du mot de passe</h4>
+                            <TextInput
+                                id="password_confirmation"
+                                v-model="formPassword.password_confirmation"
+                                type="password"
+                                class="mt-1 block w-full"
+                                autocomplete="new-password"
+                            />
+
+                            <InputError
+                                :message="formPassword.errors.password_confirmation"
+                                class="mt-2"
+                            />
+                        </div>
+                    </div>
+                    <PrimaryButton :disabled="form.processing">
+                        <template #texte>Modifier le mot de passe</template>
+                    </PrimaryButton>
+                </form>
+            </div>
+        </div>
     </section>
 </template>

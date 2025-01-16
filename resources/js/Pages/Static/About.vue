@@ -10,16 +10,19 @@ import CTATimeless from '@images/about/CTATimeless.png';
 import beforeNine from '@images/dashboard/1900Century.png';
 import aboutWaiter from '@images/about/aboutWaiter.jpg';
 import immersion from '@images/about/immersion.png';
+
+import { useRedirectRoute } from '@/composables/useRedirectRoute';
 </script>
 <template>
     <Head title="About" />
     <AuthenticatedLayout>
         <template #title>À Propos</template>
         <template #subtitle>Découvrez l'histoire et les valeurs qui font de Timeless un lieu unique de détente et de gastronomie.</template>
+        <template #href>#about</template>
     </AuthenticatedLayout>
 
 
-    <section class="py-16 px-4 backgroundColor h-[90vh]">
+    <section id="about" class="py-16 px-4 backgroundColor h-[90vh]">
         <div class="flex flex-col md:flex-row items-center justify-center p-4 md:p-10">
         <div class="w-full md:w-1/2 p-4 md:p-10 text-white">
             <h1 class="font-size-40px font-bold fontPrimaryTitle primaryColor">QUI SOMMES NOUS ?</h1>
@@ -89,7 +92,7 @@ import immersion from '@images/about/immersion.png';
             <h2 class="font-size-40px primaryColor fontPrimaryTitle">Voyagez à Travers le Temps avec Nous !</h2>
             <p class="text-white fontSegoeUIBold mb-8">Offrez-vous une expérience inoubliable en plongeant dans l'histoire et la culture des époques passées. 
                 Notre restaurant-hôtel vous invite à découvrir une cuisine d’exception, des ambiances immersives et un service d'une élégance intemporelle</p>
-            <PrimaryButton>
+            <PrimaryButton @click="useRedirectRoute('/pageUnderDevelopment')">
                 <template #texte>
                     Réservez maintenant
                 </template>
